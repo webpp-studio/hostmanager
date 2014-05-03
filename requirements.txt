@@ -1,0 +1,5 @@
+django-admin-tools
+south
+mysql-python
+django_compressor
+BeautifulSoup

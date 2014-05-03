@@ -1,0 +1,204 @@
+body {
+    position: relative;
+    padding-top: 70px;
+    padding-bottom: 40px;
+    font-family: Arial, sans-serif;
+    color: #000;
+    min-width: 900px;
+}
+.well, .input-xlarge {
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+}
+.site-list, .backup-list {
+    margin: 0;
+    padding: 0;
+}
+
+.fixed {
+  position: fixed;
+}
+
+
+@media all and (max-width: 1090px) {
+  .site-list, .backup-list {
+    -webkit-column-count: 1;
+    -moz-column-count: 1;
+    column-count: 1;
+  }
+}
+
+@media all and (min-width: 1091px) {
+  .site-list, .backup-list {
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
+  }
+}
+
+.site-item, .backup-item {
+    display: block;
+    color: black;
+    padding: 13px 5px;
+    border-bottom: 1px solid #ddd;
+}
+.site-item > i, .backup-item > i {
+    padding-right: 8px;
+}
+span.mark {
+  background: yellow;
+}
+
+.site-item:hover, .backup-item:hover {
+    background: #e5e5e5;
+    color: black;
+    text-decoration: none;
+}
+.error > .site-item,
+.error > .backup-item {
+    background: #B94A48;
+    color: white;
+}
+.site-item.active,
+.site-item.active:hover
+.backup-item.active,
+.backup-item.active:hover  {
+    background: #08c;
+    border-color: #08c;
+    color: white;
+}
+.backup-item.active a,
+.site-item.active a {
+    color: white;
+}
+.backup-item a,
+.site-item a {
+    color: #0066BC;
+}
+.navbar {
+    font-size: 13px;
+}
+.navbar .brand {
+    font-size: 15px; 
+}
+.sidebar-nav {
+    font-size: 13px;
+}
+.bs-docs-sidenav {
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  -webkit-box-shadow: 0 1px 6px rgba(0,0,0,.065);
+     -moz-box-shadow: 0 1px 6px rgba(0,0,0,.065);
+          box-shadow: 0 1px 6px rgba(0,0,0,.065);
+  width: 22%;
+}
+.bs-docs-sidenav li > a {
+  display: block;
+  min-width: 190px;
+  margin: 0 0 -1px;
+  padding: 8px 16px;
+  border: 1px solid #e5e5e5;
+}
+.bs-docs-sidenav .active > a {
+  position: relative;
+  z-index: 2;
+  padding: 9px 15px;
+  border: 0;
+  text-shadow: 0 1px 0 rgba(0,0,0,.15);
+  -webkit-box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
+     -moz-box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
+          box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
+}
+/* Chevrons */
+.bs-docs-sidenav .icon-chevron-right {
+  float: right;
+  margin-top: 2px;
+  margin-right: -6px;
+  opacity: .25;
+}
+.bs-docs-sidenav li > a:hover {
+  background-color: #f5f5f5;
+}
+.bs-docs-sidenav a:hover .icon-chevron-right {
+  opacity: .5;
+}
+.bs-docs-sidenav .active .icon-chevron-right,
+.bs-docs-sidenav .active a:hover .icon-chevron-right {
+  background-image: url(../img/glyphicons-halflings-white.png);
+  opacity: 1;
+}
+.bs-docs-sidenav.affix {
+  top: 40px;
+}
+.bs-docs-sidenav.affix-bottom {
+  position: absolute;
+  top: auto;
+  bottom: 270px;
+}
+h1, h2, h3, legend {
+    font-family: "Trebuchet MS", Arial, sans-serif;
+}
+h1 {
+    padding-bottom: 0.2em;
+    color: #600;
+}
+h2, legend {
+    font-weight: normal;
+    color: #222;
+    font-size: 24px;
+}
+.bold {
+    font-weight: bold;
+}
+.aside-bar {
+    position: fixed;
+}
+#new-domain,
+#new-system-user,
+#new-system-passwd,
+#new-db-user,
+#new-db-passwd,
+#new-db-name {
+    font-weight: bold;
+}
+
+pre {
+    border: 1px dotted #999;
+    background: #fff;
+}
+pre code {
+    font-size: 14px;
+    font-family: Monospace;
+}
+#site-detail-info {
+    margin: 95px 0;
+    padding: 7px 14px;
+    background: white;
+    box-shadow: 0 1px 6px rgba(0,0,0,.065);
+    width: 20%;
+    min-width: 190px;
+}
+#site-detail-info > .item-title {
+    line-height: 1.5;
+    font-size: 18px;
+    color: #600;
+    padding: 0;
+    padding-bottom: 7px;
+    margin: 0;
+}
+#site-detail-info > .item-properties {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+#site-detail-info button {
+    margin-top: 15px;
+}
+#site-detail-info > .item-properties > .is_active > .prop-value {
+    font-weight: bold;
+}
+.site-list .controls {
+  float: right;
+}

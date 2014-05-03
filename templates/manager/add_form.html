@@ -1,0 +1,39 @@
+{% extends "manager/index.html" %}
+
+{% block head %}
+    <title>Добавить сайт</title>
+{% endblock %}
+
+{% block content_inner %}
+    <div class="tab-pane active well" id="create-new-host">
+        {% if create_site_form %}
+            <form method="post" action="{% url create-host %}" id="site-create-form" class="form-horizontal">{% csrf_token %}
+                <legend>Новый сайт</legend>
+                <div class="control-group" id="nameControlGroup">
+                    <label class="control-label" for="{{ create_site_form.name.id }}">Название сайта:</label>
+                    <div class="controls">
+                        {{ create_site_form.name }}
+                    </div>
+                </div>
+                <div class="control-group" id="domainControlGroup">
+                    <label class="control-label" for="{{ create_site_form.domain.id }}">Адрес домена:</label>
+                    <div class="controls">
+                        {{ create_site_form.domain }}
+                    </div>
+                </div>
+                <div class="control-group hide">
+                    <div class="controls">
+                        <label class="checkbox">
+                            {{ create_site_form.is_active }} Активировать площадку
+                        </label>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <button type="submit" class="btn submit"><i class="icon-ok"></i> Создать</button>
+                    </div>
+                </div>
+            </form>
+        {% endif %}
+    </div>
+{% endblock %}

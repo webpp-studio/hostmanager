@@ -1,0 +1,56 @@
+{% extends "manager/index.html" %}
+
+{% block head %}
+    <title>Список хостов</title>
+{% endblock %}
+
+{% block content_inner %}
+    <div>
+        {% if object_list.count or filterString %}
+            <form class="{% if not page.has_other_pages and not filterString %}search-form{% endif %}" action=".">
+                <div class="input-append">
+                    <input type="search" id="host-filter-input" class="input-xlarge" name="filter" placeholder="Введите домен или имя сайта" autofocus autocomplete="off"{% if filterString %} value="{{ filterString }}"{% endif %}>
+                    <button class="btn" type="submit"><i class="icon-search"></i></button>
+                </div>
+            </form>
+            {% if not filterString %}
+            <h2>Список сайтов (<span id="host-count">{{ paginator.count }}</span>)</h2>
+            {% elif filterString %}
+            <h2>Найдено сайтов: <span id="host-count">{{ paginator.count }}</span></h2>
+            {% endif %}
+            <ul class="site-list">
+                {% for site in object_list %}
+                    <li rel="{{ site.pk }}" class="site-item-block">
+                        <a class="site-item" href="{% url manager.views.get_site_info site.pk %}" rel="ajax"><i class="icon-chevron-right"></i> <span class="filter-name">{{ site.site_name }}</span>&nbsp;&mdash;&nbsp;<code style="color:#660000;" class="filter-domain">{{ site.domain }}</code></a>
+                    </li>
+                {% endfor %}
+            </ul>
+            {% if page.has_other_pages %}
+            <div class="pagination">
+                <ul>
+                    {% if page.has_previous %}
+                        <li><a href="?page={{ page.previous_page_number }}">&laquo;</a>
+                    {% else %}
+                        <li class="disabled"><span>&laquo;</span>
+                    {% endif %}
+                    {% for number in paginator.page_range %}
+                        {% ifequal page.number number %}
+                            <li class="active"><span>{{ number }}</span>
+                        {% else %}
+                            <li><a href="?page={{ number }}">{{ number }}</a>
+                        {% endifequal %}
+                    {% endfor %}
+                    {% if page.has_next %}
+                        <li><a href="?page={{ page.next_page_number }}">&raquo;</a>
+                    {% else %}
+                        <li class="disabled"><span>&raquo;</span>
+                    {% endif %}
+                </ul>
+            </div>
+            {% endif %}
+        {% else %}
+        <h2>Нет доступных сайтов</h2>
+        <p>В систему еще не было добавлено ни одного хоста.</p>
+        {% endif %}
+    </div>
+{% endblock %}

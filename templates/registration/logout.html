@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>Выход из системы</title>
+{% endblock %}
+
+{% block content %}
+<p class="alert alert-success">Вы успешно вышли из системы</p>
+<p><a class="btn" href="{% url manager-index %}"><i class="icon-home"></i> На главную<a></p>
+{% endblock %}

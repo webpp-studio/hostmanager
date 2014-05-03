@@ -1,0 +1,8 @@
+#! -*- coding: utf-8 -*-
+
+DEBUG = True
+
+HOSTMANAGER_DB_ROOT_USER = ''
+HOSTMANAGER_DB_ROOT_PASSWD = ''
+HOSTMANAGER_DB_HOST = ''
+

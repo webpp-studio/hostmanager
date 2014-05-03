@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        {% block head %}{% endblock %}
+	    <link rel="shortcut icon" href="/favicon.ico">
+        {% load compress %}{% compress css %}
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css">
+        {% endcompress %}
+        {% compress js %}
+        <script src="{{ STATIC_URL }}js/jquery-1.8.1.min.js"></script>
+        <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+        <script src="{{ STATIC_URL }}js/main.js"></script>
+        {% endcompress %}
+    </head>
+    <body>
+        <div class="navbar navbar-fixed-top navbar-inverse">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="{% url manager-index %}"><i class="icon-home icon-white"></i> Host manager</a>
+                    {% if user.is_authenticated %}
+                    <div class="btn-group pull-right">
+                        <a href="#" class="btn dropdown-toggle" data-toggle="dropdown">
+                            <i class="icon-user"></i>
+                            {{ user.get_full_name }}
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{% url change-password %}"><i class="icon-pencil"></i> Изменить пароль</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{% url auth_logout %}"><i class="icon-off"></i> Выйти</a></li>
+                        </ul>
+                    </div>
+                    {% endif %}
+                    <div class="nav-collapse collapse">
+                        <ul class="nav">
+                            <li{% if '/sites/' in request.get_full_path %} class="active"{% endif %}><a href="{% url manager-index %}"><i class="icon-th icon-white"></i> Сайты</a></li>
+                            {% if user.is_staff %}
+                            <li><a href="{% url admin:index %}"><i class="icon-wrench icon-white"></i> Админка</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- div.navbar -->
+        <div class="container-fluid">
+            <div class="row-fluid">
+                {% block sidebar %}{% endblock %}
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </body>
+</html>

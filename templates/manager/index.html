@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+    
+{% block head %}
+    <title>Управление виртуальными хостами</title>
+{% endblock %}
+
+{% block sidebar %}
+    <div class="bs-docs-sidebar span3">
+        <ul class="nav nav-list bs-docs-sidenav aside-menu-tab fixed">
+            <li{% if "/sites/add/" in request.get_full_path %} class="active"{% endif %}><a href="{% url create-host %}"><i class="icon-chevron-right"></i><i class="icon-plus"></i> Новый сайт</a>
+            <li{% if "/sites/list/" in request.get_full_path %} class="active"{% endif %}><a href="{% url site-list %}"><i class="icon-chevron-right"></i><i class="icon-th"></i> Список хостов</a>
+            </ul>
+            <div id="site-detail-info" class="bs-docs-sitenav hide fixed">
+                <h3 class="item-title"></h3>
+                <ul class="item-properties">
+                    <li class="domain">Домен: <span class="prop-value"></span>
+                    <li class="description">Описание: <span class="prop-value"></span>
+                    <li class="is_active">Активность: <span class="prop-value"></span>
+                </ul>
+                <button class="show-access-data btn btn-small">
+                    <i class="icon-eye-open"></i> Показать реквизиты
+                </button>
+                {% if can_delete %}
+                <form method="post" class="delete-host-form" action="#" style="display:inline-block;">{% csrf_token %}
+                    <button class="delete-host btn btn-danger btn-small" type="submit">
+                        <i class="icon-remove icon-white"></i> Удалить
+                    </button>
+                </form>
+                {% endif %}
+            </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="span9 tab-content">
+        <div class="well">
+            <h1>Host manager</h1>
+            <p>Web-интерфейс для управления виртуальными хостами Nginx/Apache. Автоматическая настройка конфигурационных файлов, включение реверс-проксирования от nginx к apache.</p>
+        </div>
+        {% block content_inner %}{% endblock %}
+    <div class="modal hide fade" id="success-modal">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h1>Поздравляем!</h1>
+        </div>
+        <div class="modal-body">
+            <p class="alert alert-success">Сайт <span id="new-domain"></span> был успешно создан. Реквизиты доступа:</p>
+            <pre><code><strong>SSH/SFTP:</strong>
+    Пользователь: <span id="new-system-user"></span>
+    Пароль: <span id="new-system-passwd"></span>
+    Хост: <span id="new-system-host">root.webpp.ru</span>
+    
+<strong>База MySQL:</strong>
+    Пользователь: <span id="new-db-user"></span>
+    База: <span id="new-db-name"></span>
+    Пароль: <span id="new-db-passwd"></span>
+    Хост: <span id="new-db-host">localhost</span>
+</code></pre>
+        </div>
+        <div class="modal-footer">
+            <!--<a href="#" class="btn">Скопировать</a>-->
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Закрыть</a>
+        </div>
+    </div>
+    <div class="modal hide fade" id="site-edit-modal">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h1>Изменить сайт</h1>
+        </div>
+        <div class="modal-body">
+            <form method="post" action="{% url change-host %}" id="site-change-form" class="form-horizontal create-site-form">{% csrf_token %}
+                <div class="control-group">
+                    <label class="control-label" for="{{ create_site_form.name.id }}">Название сайта:</label>
+                    <div class="controls">{{ create_site_form.name }}</div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="{{ create_site_form.description.id }}">Описание сайта:</label>
+                    <div class="controls">{{ create_site_form.description }}</div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="{{ create_site_form.domain.id }}">Адрес домена:</label>
+                    <div class="controls">{{ create_site_form.domain }}</div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <label class="checkbox">
+                            {{ create_site_form.is_active }} Активен
+                        </label>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn submit"><i class="icon-ok"></i> Сохранить</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Отмена</a>
+        </div>
+    </div>
+{% endblock %}
