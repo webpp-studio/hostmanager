@@ -1,5 +1,5 @@
-django-admin-tools
 south
 mysql-python
 django_compressor
 BeautifulSoup
+django==1.4.3
